@@ -1,9 +1,12 @@
 package com.angelvargas.cvapp.domain
 
-import com.angelvargas.data.Work
+import com.angelvargas.data.models.Basics
+import com.angelvargas.data.models.Languages
+import com.angelvargas.data.models.Skills
+import com.angelvargas.data.models.Work
 import com.google.gson.annotations.SerializedName
 
-data class Resume(
+data class ResumeResponse(
         @SerializedName("basics")
     val basics: Basics?,
         @SerializedName("work")
