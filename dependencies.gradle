@@ -36,6 +36,7 @@ ext {
     mockitoVersion = '2.23.4'
     mockWebServerVersion = '3.13.1'
     lifecycleVersion = '1.1.1'
+    stethoVersion = '1.5.1'
 
     androidSupport = [
             supportDesign     : "com.android.support:design:${androidSupportVersion}",
@@ -75,7 +76,9 @@ ext {
     appDependencies = [
             picasso             : "com.squareup.picasso:picasso:${picassoVersion}",
             cardio              : "io.card:android-sdk:${cardioVersion}",
-            lifecycleCompiler   : "android.arch.lifecycle:compiler:${lifecycleVersion}"
+            lifecycleCompiler   : "android.arch.lifecycle:compiler:${lifecycleVersion}",
+            stetho              : "com.facebook.stetho:stetho:${stethoVersion}",
+            stethoOkHttp        : "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
     ]
 
 

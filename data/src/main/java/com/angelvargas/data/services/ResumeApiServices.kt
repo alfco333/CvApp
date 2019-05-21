@@ -11,5 +11,6 @@ interface ResumeApiServices {
 
     companion object {
         const val ENDPOINT_CV = "cv"
+        const val BASE_URL =  "http://demo6959920.mockable.io/"
     }
 }
