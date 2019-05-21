@@ -3,7 +3,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'realm-android'
 apply from: '../dependencies.gradle'
 
 android {
@@ -48,8 +47,6 @@ android {
 
 dependencies {
 
-
-    implementation project(':domain')
     implementation appDependencies.values()
     implementation androidSupport.values()
     implementation rx.values()
