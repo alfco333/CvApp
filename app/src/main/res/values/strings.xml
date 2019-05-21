@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CV App</string>
+    <string name="connection_error">There is a problem with the connection. Please check you internet connection or try again later</string>
+    <string name="timeout_error">The time for the response was exceeded. Please try again later</string>
+    <string name="generic_error">There are communication problems with the server. </string>
+    <string name="text_date_template_format">%1$s-%2$s</string>
 </resources>
