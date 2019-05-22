@@ -6,6 +6,7 @@ import com.angelvargas.cvapp.domain.usecase.GetResumeInformationUseCase
 import com.angelvargas.data.database.DatabaseProvider
 import com.angelvargas.data.mappers.RealmResumeMapper
 import com.angelvargas.data.mappers.ResumeDataMapper
+import com.angelvargas.data.mappers.ResumeRealmDataMapper
 import com.angelvargas.data.models.database.RealmResume
 import com.angelvargas.data.remote.ResumeResponse
 import com.angelvargas.data.services.ResumeApiServices
@@ -22,7 +23,20 @@ class ResumeDataRepository(
                 .map {
                     storeInRealm(it)
                     ResumeDataMapper().transform(it)
-                }.onErrorResumeNext{ throwable -> Single.error(getResumeErrorHandler(throwable))}
+                }.onErrorResumeNext{ getLocalCvInformation() }
+    }
+
+    override fun getLocalCvInformation(): Single<ResumeData> {
+        return Single.fromCallable {
+            return@fromCallable realmProvider.instance.use {
+                val realmResults = it.where(RealmResume::class.java).findFirst()
+                if (realmResults == null) {
+                    throw GetResumeInformationUseCase.ResumeException.GenericError()
+                } else {
+                    ResumeRealmDataMapper().transform(realmResults)
+                }
+            }
+        }.onErrorResumeNext{ error -> Single.error(getResumeErrorHandler(error)) }
     }
 
     private fun storeInRealm(resumeResponse: ResumeResponse) {

@@ -6,4 +6,5 @@ import io.reactivex.Single
 interface ResumeRepository {
 
     fun getCvInformation(): Single<ResumeData>
+    fun getLocalCvInformation(): Single<ResumeData>
 }
