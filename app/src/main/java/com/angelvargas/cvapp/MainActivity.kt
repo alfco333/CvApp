@@ -26,6 +26,8 @@ import com.angelvargas.cvapp.presenter.ResumePresenter
 import com.angelvargas.cvapp.services.PicassImageService
 import com.angelvargas.cvapp.view.ErrorView
 import com.angelvargas.cvapp.view.LoadingView
+import com.angelvargas.data.database.RealmProvider
+import com.angelvargas.data.database.RealmResumeDataSource
 import com.angelvargas.data.executor.JobExecutor
 import com.angelvargas.data.executor.UiExecutor
 import com.angelvargas.data.network.ApiServiceFactory
@@ -56,7 +58,7 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
                 this,
                 ResumeResourceManager(resources),
                 GetResumeInformationUseCase(ResumeDataRepository(ApiServiceFactory()
-                    .makeApiService(ResumeApiServices::class.java)),
+                    .makeApiService(ResumeApiServices::class.java), RealmResumeDataSource(RealmProvider())),
                     JobExecutor(),
                     UiExecutor()))
     }

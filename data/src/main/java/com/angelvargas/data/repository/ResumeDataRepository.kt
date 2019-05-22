@@ -3,11 +3,8 @@ package com.angelvargas.data.repository
 import com.angelvargas.cvapp.domain.models.ResumeData
 import com.angelvargas.cvapp.domain.repository.ResumeRepository
 import com.angelvargas.cvapp.domain.usecase.GetResumeInformationUseCase
-import com.angelvargas.data.database.DatabaseProvider
-import com.angelvargas.data.mappers.RealmResumeMapper
+import com.angelvargas.data.database.LocalDataSource
 import com.angelvargas.data.mappers.ResumeDataMapper
-import com.angelvargas.data.mappers.ResumeRealmDataMapper
-import com.angelvargas.data.models.database.RealmResume
 import com.angelvargas.data.remote.ResumeResponse
 import com.angelvargas.data.services.ResumeApiServices
 import io.reactivex.Single
@@ -15,7 +12,7 @@ import java.net.SocketTimeoutException
 
 class ResumeDataRepository(
     private val resumeServices: ResumeApiServices,
-    private val realmProvider: DatabaseProvider
+    private val localDataSource: LocalDataSource
 ): ResumeRepository {
 
     override fun getCvInformation(): Single<ResumeData> {
@@ -27,26 +24,12 @@ class ResumeDataRepository(
     }
 
     override fun getLocalCvInformation(): Single<ResumeData> {
-        return Single.fromCallable {
-            return@fromCallable realmProvider.instance.use {
-                val realmResults = it.where(RealmResume::class.java).findFirst()
-                if (realmResults == null) {
-                    throw GetResumeInformationUseCase.ResumeException.GenericError()
-                } else {
-                    ResumeRealmDataMapper().transform(realmResults)
-                }
-            }
-        }.onErrorResumeNext{ error -> Single.error(getResumeErrorHandler(error)) }
+        return localDataSource.getLocalCvInformation()
+            .onErrorResumeNext{ error -> Single.error(getResumeErrorHandler(error)) }
     }
 
     private fun storeInRealm(resumeResponse: ResumeResponse) {
-        realmProvider.instance.use { realm ->
-            realm.executeTransaction {
-                it.deleteAll()
-                val realmResume: RealmResume = RealmResumeMapper().transform(resumeResponse)
-                it.copyToRealmOrUpdate(realmResume)
-            }
-        }
+        localDataSource.storeReceivedData(resumeResponse)
     }
 
     private fun getResumeErrorHandler(throwable: Throwable): Throwable {
