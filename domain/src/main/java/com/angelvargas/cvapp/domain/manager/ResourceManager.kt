@@ -6,4 +6,5 @@ interface ResourceManager {
     fun getTimeoutExceptionMessage(): String
     fun getGenericExceptionMessage(): String
     fun getSkillsHeader(): String
+    fun getWorkPeriodFormat(startDate: String?, endDate: String?): String
 }

@@ -19,7 +19,7 @@ class ResumeDataMapper: Transform<ResumeResponse, ResumeData>() {
                 value.skills?.let { skillsMapper.transformCollection(it) })
     }
 
-    inner class BasicsDataMapper: Transform<Basics, BasicsData>() {
+    class BasicsDataMapper: Transform<Basics, BasicsData>() {
         override fun transform(value: Basics): BasicsData {
             val profilesMapper = ProfilesDataMapper()
             return BasicsData(value.name,
@@ -31,14 +31,14 @@ class ResumeDataMapper: Transform<ResumeResponse, ResumeData>() {
         }
     }
 
-    inner class ProfilesDataMapper: Transform<Profiles, ProfileData>() {
+    class ProfilesDataMapper: Transform<Profiles, ProfileData>() {
 
         override fun transform(value: Profiles): ProfileData {
             return ProfileData(value.network, value.username, value.url)
         }
     }
 
-    inner class WorkDataMapper: Transform<Work, WorkData>() {
+    class WorkDataMapper: Transform<Work, WorkData>() {
 
         override fun transform(value: Work): WorkData {
             return WorkData(value.company,
@@ -51,7 +51,7 @@ class ResumeDataMapper: Transform<ResumeResponse, ResumeData>() {
         }
     }
 
-    inner class SkillsDataMapper: Transform<Skills, SkillsData>() {
+    class SkillsDataMapper: Transform<Skills, SkillsData>() {
 
         override fun transform(value: Skills): SkillsData {
             return SkillsData(value.name, value.level, value.keywords)

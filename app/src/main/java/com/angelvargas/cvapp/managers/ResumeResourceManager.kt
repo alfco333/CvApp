@@ -21,4 +21,12 @@ class ResumeResourceManager(private val resources: Resources): ResourceManager {
     override fun getSkillsHeader(): String {
         return ""
     }
+
+    override fun getWorkPeriodFormat(startDate: String?, endDate: String?): String {
+        return if (startDate.isNullOrEmpty() || endDate.isNullOrEmpty()) {
+            ""
+        } else {
+            resources.getString(R.string.text_date_template_format, startDate, endDate)
+        }
+    }
 }

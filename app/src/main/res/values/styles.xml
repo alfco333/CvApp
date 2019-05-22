@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CardViewStyle" parent="CardView" >
+        <item name="cardBackgroundColor">@android:color/white</item>
+        <item name="cardCornerRadius">@dimen/card_view_corner_radius</item>
+        <item name="cardElevation">@dimen/card_view_elevation</item>
+    </style>
+
 </resources>

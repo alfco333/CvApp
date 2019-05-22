@@ -4,4 +4,8 @@
     <string name="timeout_error">The time for the response was exceeded. Please try again later</string>
     <string name="generic_error">There are communication problems with the server. </string>
     <string name="text_date_template_format">%1$s-%2$s</string>
+    <string name="text_linkedin">Linkedin</string>
+    <string name="text_github">GitHub</string>
+    <string name="title_skills_list">Candidate Skills</string>
+    <string name="title_previous_experience">Previous Experience</string>
 </resources>
