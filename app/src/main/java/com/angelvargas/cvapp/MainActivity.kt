@@ -12,11 +12,11 @@ import com.angelvargas.cvapp.managers.ResumeResourceManager
 import com.angelvargas.cvapp.presenter.ResumePresenter
 import com.angelvargas.cvapp.view.ErrorView
 import com.angelvargas.cvapp.view.LoadingView
+import com.angelvargas.data.executor.JobExecutor
+import com.angelvargas.data.executor.UiExecutor
 import com.angelvargas.data.network.ApiServiceFactory
 import com.angelvargas.data.repository.ResumeDataRepository
 import com.angelvargas.data.services.ResumeApiServices
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract.View {
 
@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
                 ResumeResourceManager(resources),
                 GetResumeInformationUseCase(ResumeDataRepository(ApiServiceFactory()
                     .makeApiService(ResumeApiServices::class.java)),
-                    Schedulers.io(),
-                    AndroidSchedulers.mainThread()))
+                    JobExecutor(),
+                    UiExecutor()))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

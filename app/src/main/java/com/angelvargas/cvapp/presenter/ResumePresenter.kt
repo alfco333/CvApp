@@ -28,17 +28,17 @@ class ResumePresenter(
                         loadingView.hideProgressBar()
                         resumeData.basics?.let {
                             resumeView.renderBasicInformation(it)
-                        } ?: kotlin.run {
+                        } ?: run {
                             resumeView.showBasicsPlaceHolder()
                         }
                         resumeData.skills?.let {
                             resumeView.renderSkillsInformation(it)
-                        } ?: kotlin.run {
+                        } ?: run {
                             resumeView.showSkillsPlaceHolder()
                         }
                         resumeData.work?.let {
                             resumeView.renderWorksInformation(it)
-                        } ?: kotlin.run {
+                        } ?: run {
                             resumeView.showWorksPlaceHolder()
                         }
                     }, {

@@ -9,7 +9,8 @@ import com.angelvargas.data.models.Work
 import com.angelvargas.data.remote.ResumeResponse
 import com.angelvargas.data.services.ResumeApiServices
 import io.reactivex.Single
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
+
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
