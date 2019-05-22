@@ -1,18 +1,15 @@
-package com.angelvargas.cvapp.domain
+package com.angelvargas.data.remote
 
 import com.angelvargas.data.models.Basics
-import com.angelvargas.data.models.Languages
 import com.angelvargas.data.models.Skills
 import com.angelvargas.data.models.Work
 import com.google.gson.annotations.SerializedName
 
 data class ResumeResponse(
-        @SerializedName("basics")
+    @SerializedName("basics")
     val basics: Basics?,
-        @SerializedName("work")
+    @SerializedName("work")
     val work: List<Work>?,
-        @SerializedName("skills")
-    val skills: List<Skills>?,
-        @SerializedName("languages")
-    val languages: List<Languages>?
+    @SerializedName("skills")
+    val skills: List<Skills>?
 )

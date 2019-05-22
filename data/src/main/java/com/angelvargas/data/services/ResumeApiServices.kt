@@ -1,6 +1,6 @@
 package com.angelvargas.data.services
 
-import com.angelvargas.cvapp.domain.ResumeResponse
+import com.angelvargas.data.remote.ResumeResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 

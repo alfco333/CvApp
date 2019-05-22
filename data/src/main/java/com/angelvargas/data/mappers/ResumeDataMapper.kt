@@ -1,8 +1,11 @@
 package com.angelvargas.data.mappers
 
-import com.angelvargas.cvapp.domain.ResumeResponse
 import com.angelvargas.cvapp.domain.models.*
-import com.angelvargas.data.models.*
+import com.angelvargas.data.models.Basics
+import com.angelvargas.data.models.Profiles
+import com.angelvargas.data.models.Skills
+import com.angelvargas.data.models.Work
+import com.angelvargas.data.remote.ResumeResponse
 
 class ResumeDataMapper: Transform<ResumeResponse, ResumeData>() {
 
@@ -10,12 +13,10 @@ class ResumeDataMapper: Transform<ResumeResponse, ResumeData>() {
         val basicsMapper = BasicsDataMapper()
         val workMapper = WorkDataMapper()
         val skillsMapper = SkillsDataMapper()
-        val languagesMapper = LanguagesDataMapper()
         return ResumeData(
                 value.basics?.let { basicsMapper.transform(it) },
                 value.work?.let { workMapper.transformCollection(it) },
-                value.skills?.let { skillsMapper.transformCollection(it) },
-                value.languages?.let { languagesMapper.transformCollection(it) })
+                value.skills?.let { skillsMapper.transformCollection(it) })
     }
 
     inner class BasicsDataMapper: Transform<Basics, BasicsData>() {
@@ -54,13 +55,6 @@ class ResumeDataMapper: Transform<ResumeResponse, ResumeData>() {
 
         override fun transform(value: Skills): SkillsData {
             return SkillsData(value.name, value.level, value.keywords)
-        }
-    }
-
-    inner class LanguagesDataMapper: Transform<Languages, LanguagesData>() {
-
-        override fun transform(value: Languages): LanguagesData {
-            return LanguagesData(value.language, value.fluency)
         }
     }
 }
