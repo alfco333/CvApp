@@ -37,6 +37,8 @@ ext {
     mockWebServerVersion = '3.13.1'
     lifecycleVersion = '1.1.1'
     stethoVersion = '1.5.1'
+    lottieVersion = "2.7.0"
+    circleImageVersion = "3.0.0"
 
     androidSupport = [
             supportDesign     : "com.android.support:design:${androidSupportVersion}",
@@ -78,8 +80,8 @@ ext {
             cardio              : "io.card:android-sdk:${cardioVersion}",
             lifecycleCompiler   : "android.arch.lifecycle:compiler:${lifecycleVersion}",
             stetho              : "com.facebook.stetho:stetho:${stethoVersion}",
-            stethoOkHttp        : "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
+            stethoOkHttp        : "com.facebook.stetho:stetho-okhttp3:${stethoVersion}",
+            lottie              : "com.airbnb.android:lottie:${lottieVersion}",
+            circleImage         : "de.hdodenhof:circleimageview:$circleImageVersion"
     ]
-
-
 }
