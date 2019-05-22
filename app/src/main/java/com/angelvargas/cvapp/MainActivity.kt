@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ImageView
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
     private var profileImage: ImageView? = null
     private var profileDescription: TextView? = null
     private var skillsTitle: TextView? = null
+    private var placeholderContainer: View? = null
 
     private var workSkillsAdapter: WorkSkillsAdapter? = null
     private var previousWorksAdapter: PreviousWorksAdapter? = null
@@ -71,6 +73,11 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
         resumePresenter.getResumeInformation()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        resumePresenter.dispose()
+    }
+
     override fun initializeViewComponents() {
         progressBar = this.findViewById(R.id.lottie_loading)
         skillsRecyclerView = this.findViewById(R.id.skills_list)
@@ -80,10 +87,12 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
         profileDescription = this.findViewById(R.id.tv_profile_description)
         infoContainer = this.findViewById(R.id.info_container)
         skillsTitle = this.findViewById(R.id.tv_profile_main_skill)
+        placeholderContainer = this.findViewById(R.id.container_placeholder)
     }
 
     override fun renderBasicInformation(basicInformation: BasicsData) {
         infoContainer?.visibility = VISIBLE
+        placeholderContainer?.visibility = GONE
         profileName?.text = basicInformation.name
         profileDescription?.text = basicInformation.summary
         profileImage?.let { imageService.loadImageInto(it, basicInformation.picture) }
@@ -116,16 +125,9 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
         }
     }
 
-    override fun showBasicsPlaceHolder() {
-        //TO-BE-DONE
-    }
-
-    override fun showSkillsPlaceHolder() {
-        //TO-BE-DONE
-    }
-
-    override fun showWorksPlaceHolder() {
-        //TO-BE-DONE
+    override fun showResumePlaceHolder() {
+        infoContainer?.visibility = GONE
+        placeholderContainer?.visibility = VISIBLE
     }
 
     override fun showError(errorMessage: String) {

@@ -8,4 +8,5 @@
     <string name="text_github">GitHub</string>
     <string name="title_skills_list">Candidate Skills</string>
     <string name="title_previous_experience">Previous Experience</string>
+    <string name="placeholder_text">The information is not available for the moment</string>
 </resources>

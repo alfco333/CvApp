@@ -29,20 +29,21 @@ class ResumePresenter(
                         resumeData.basics?.let {
                             resumeView.renderBasicInformation(it)
                         } ?: run {
-                            resumeView.showBasicsPlaceHolder()
+                            resumeView.showResumePlaceHolder()
                         }
                         resumeData.skills?.let {
                             resumeView.renderSkillsInformation(it)
                         } ?: run {
-                            resumeView.showSkillsPlaceHolder()
+                            resumeView.showResumePlaceHolder()
                         }
                         resumeData.work?.let {
                             resumeView.renderWorksInformation(it)
                         } ?: run {
-                            resumeView.showWorksPlaceHolder()
+                            resumeView.showResumePlaceHolder()
                         }
                     }, {
                         loadingView.hideProgressBar()
+                        resumeView.showResumePlaceHolder()
                         if (it is GetResumeInformationUseCase.ResumeException.TimeoutException) {
                             errorView.showError(resourceManager.getTimeoutExceptionMessage())
                         } else {
