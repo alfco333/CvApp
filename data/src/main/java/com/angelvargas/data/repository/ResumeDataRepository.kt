@@ -42,7 +42,7 @@ class ResumeDataRepository(
     private fun storeInRealm(resumeResponse: ResumeResponse) {
         realmProvider.instance.use { realm ->
             realm.executeTransaction {
-                it.where(RealmResume::class.java).findAll().deleteAllFromRealm()
+                it.deleteAll()
                 val realmResume: RealmResume = RealmResumeMapper().transform(resumeResponse)
                 it.copyToRealmOrUpdate(realmResume)
             }
