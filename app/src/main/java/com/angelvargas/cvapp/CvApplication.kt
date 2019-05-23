@@ -7,6 +7,7 @@ import com.angelvargas.cvapp.di.DaggerAppComponent
 import com.angelvargas.data.di.DataModule
 import com.angelvargas.data.network.ApiServiceFactory
 import com.angelvargas.data.services.ResumeApiServices.Companion.BASE_URL
+import com.facebook.stetho.Stetho
 import io.realm.Realm
 
 class CvApplication: Application() {
@@ -15,6 +16,9 @@ class CvApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        }
         Realm.init(this)
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(this))
