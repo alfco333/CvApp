@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class ApiServiceFactory(val baseUrl: String) {
+class NetworkModule(val baseUrl: String) {
 
     @Provides
     @Singleton

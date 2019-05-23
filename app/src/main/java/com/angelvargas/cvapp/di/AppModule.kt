@@ -8,6 +8,9 @@ import com.angelvargas.cvapp.domain.manager.ResourceManager
 import com.angelvargas.cvapp.domain.repository.ResumeRepository
 import com.angelvargas.cvapp.domain.usecase.GetResumeInformationUseCase
 import com.angelvargas.cvapp.managers.ResumeResourceManager
+import com.angelvargas.data.database.LocalDataSource
+import com.angelvargas.data.repository.ResumeDataRepository
+import com.angelvargas.data.services.ResumeApiServices
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -39,5 +42,12 @@ class AppModule(private val context: Context) {
                                      threadExecutor: ThreadExecutor,
                                      postExecutionThread: PostExecutionThread): GetResumeInformationUseCase {
         return GetResumeInformationUseCase(resumeRepository, threadExecutor, postExecutionThread)
+    }
+
+    @Provides
+    @Singleton
+    fun providesResumeRepository(resumeServices: ResumeApiServices,
+                                 localDataSource: LocalDataSource): ResumeRepository {
+        return ResumeDataRepository(resumeServices, localDataSource)
     }
 }

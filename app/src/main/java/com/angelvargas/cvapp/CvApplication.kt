@@ -5,7 +5,7 @@ import com.angelvargas.cvapp.di.AppComponent
 import com.angelvargas.cvapp.di.AppModule
 import com.angelvargas.cvapp.di.DaggerAppComponent
 import com.angelvargas.data.di.DataModule
-import com.angelvargas.data.network.ApiServiceFactory
+import com.angelvargas.data.network.NetworkModule
 import com.angelvargas.data.services.ResumeApiServices.Companion.BASE_URL
 import com.facebook.stetho.Stetho
 import io.realm.Realm
@@ -23,7 +23,7 @@ class CvApplication: Application() {
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(this))
             .dataModule(DataModule())
-            .apiServiceFactory(ApiServiceFactory(BASE_URL))
+            .networkModule(NetworkModule(BASE_URL))
             .build()
     }
 
