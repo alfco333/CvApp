@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/profile_cardview"
-        style="@style/Base.CardView"
-        app:cardBackgroundColor="@color/colorPrimary"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -24,21 +23,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher"/>
 
-        <TextView
-                android:id="@+id/tv_profile_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_profile_image"
-                tools:text="Angel Vargas"/>
+        <!--<TextView-->
+                <!--android:id="@+id/tv_profile_name"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="@dimen/margin_medium"-->
+                <!--android:layout_marginTop="@dimen/margin_medium"-->
+                <!--android:textColor="@color/colorAccent"-->
+                <!--android:layout_marginEnd="@dimen/margin_medium"-->
+                <!--android:textStyle="bold"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/iv_profile_image"-->
+                <!--tools:text="Angel Vargas"/>-->
 
         <TextView
                 android:id="@+id/tv_profile_description"
@@ -48,10 +48,10 @@
                 android:layout_marginTop="@dimen/margin_big"
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:textAlignment="center"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:textColor="@android:color/black"
-                app:layout_constraintTop_toBottomOf="@+id/tv_profile_name"
+                app:layout_constraintTop_toBottomOf="@+id/iv_profile_image"
                 tools:text="Description"/>
 
         <android.support.constraint.ConstraintLayout
@@ -81,8 +81,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_github_container"
-                    android:text="@string/text_linkedin"
-                    android:textColor="@android:color/black"/>
+                    android:text="@string/text_linkedin"/>
 
             <TextView
                     android:id="@+id/tv_github_container"
@@ -95,9 +94,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_linkedin_container"
-                    android:text="@string/text_github"
-                    android:textColor="@android:color/black"/>
+                    android:text="@string/text_github"/>
 
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
-</android.support.v7.widget.CardView>
+</FrameLayout>

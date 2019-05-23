@@ -7,4 +7,6 @@ interface ResourceManager {
     fun getGenericExceptionMessage(): String
     fun getSkillsHeader(): String
     fun getWorkPeriodFormat(startDate: String?, endDate: String?): String
+    fun getSkillsSectionTitle(): String
+    fun getWorkSectionTitle(): String
 }

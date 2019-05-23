@@ -2,6 +2,7 @@ package com.angelvargas.cvapp.presenter
 
 import com.angelvargas.cvapp.ResumeContract
 import com.angelvargas.cvapp.domain.manager.ResourceManager
+import com.angelvargas.cvapp.domain.models.BasicsData
 import com.angelvargas.cvapp.domain.usecase.GetResumeInformationUseCase
 import com.angelvargas.cvapp.view.ErrorView
 import com.angelvargas.cvapp.view.LoadingView
@@ -26,20 +27,12 @@ class ResumePresenter(
                     .doOnSubscribe { loadingView.showProgressBar() }
                     .subscribe ({ resumeData ->
                         loadingView.hideProgressBar()
-                        resumeData.basics?.let {
-                            resumeView.renderBasicInformation(it)
-                        } ?: run {
+                        if (resumeData.basics == null || resumeData.skills == null || resumeData.work == null) {
                             resumeView.showResumePlaceHolder()
-                        }
-                        resumeData.skills?.let {
-                            resumeView.renderSkillsInformation(it)
-                        } ?: run {
-                            resumeView.showResumePlaceHolder()
-                        }
-                        resumeData.work?.let {
-                            resumeView.renderWorksInformation(it)
-                        } ?: run {
-                            resumeView.showResumePlaceHolder()
+                        } else {
+                            resumeView.renderResumeInformation(resumeData.basics ?: BasicsData(),
+                                resumeData.skills ?: emptyList(),
+                                resumeData.work ?: emptyList())
                         }
                     }, {
                         loadingView.hideProgressBar()

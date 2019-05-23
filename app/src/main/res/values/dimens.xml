@@ -8,7 +8,13 @@
 
     <dimen name="card_view_corner_radius">5dp</dimen>
     <dimen name="card_view_elevation">5dp</dimen>
+    <dimen name="skills_card_view_corner_radius">3dp</dimen>
+    <dimen name="skills_card_view_elevation">2dp</dimen>
 
-    <dimen name="profile_image_size">70dp</dimen>
+    <dimen name="profile_image_size">85dp</dimen>
+    <dimen name="work_image_size">70dp</dimen>
     <dimen name="resume_section_title_size">18sp</dimen>
+    <dimen name="header_expanded_title_text_size">25sp</dimen>
+    <dimen name="cards_title_text_size">18sp</dimen>
+    <dimen name="section_title_text_size">20sp</dimen>
 </resources>

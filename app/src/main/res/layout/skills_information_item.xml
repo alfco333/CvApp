@@ -3,8 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/profile_skills_card_view"
-        android:layout_marginTop="@dimen/margin_medium"
-        style="@style/Base.CardView"
+        android:layout_margin="@dimen/margin_medium"
+        style="@style/CardViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,6 +19,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 tools:text="Android Developer SSr Adv"
+                android:textSize="@dimen/cards_title_text_size"
+                android:padding="@dimen/margin_small"
                 android:layout_marginStart="@dimen/margin_xsmall"/>
 
         <android.support.v7.widget.RecyclerView
@@ -26,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/margin_xsmall"
+                android:padding="@dimen/margin_small"
                 android:nestedScrollingEnabled="false" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

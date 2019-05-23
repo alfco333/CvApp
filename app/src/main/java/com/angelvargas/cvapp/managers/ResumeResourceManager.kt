@@ -29,4 +29,12 @@ class ResumeResourceManager(private val resources: Resources): ResourceManager {
             resources.getString(R.string.text_date_template_format, startDate, endDate)
         }
     }
+
+    override fun getSkillsSectionTitle(): String {
+        return resources.getString(R.string.title_skills_list)
+    }
+
+    override fun getWorkSectionTitle(): String {
+        return resources.getString(R.string.title_previous_experience)
+    }
 }
