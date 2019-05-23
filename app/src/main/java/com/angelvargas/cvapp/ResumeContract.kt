@@ -16,6 +16,7 @@ interface ResumeContract {
     interface View {
 
         fun initializeViewComponents()
+        fun renderResumeInformation(basicsData: BasicsData, skillsData: List<SkillsData>, workData: List<WorkData>)
         fun renderBasicInformation(basicInformation: BasicsData)
         fun renderSkillsInformation(skillsInformation: List<SkillsData>)
         fun renderWorksInformation(workInformation: List<WorkData>)
