@@ -1,6 +1,5 @@
 package com.angelvargas.cvapp.presenter
 
-import com.angelvargas.cvapp.ResumeContract
 import com.angelvargas.cvapp.domain.manager.ResourceManager
 import com.angelvargas.cvapp.domain.models.*
 import com.angelvargas.cvapp.domain.usecase.GetResumeInformationUseCase
@@ -10,8 +9,7 @@ import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.atLeastOnce
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.mockito.Mockito.`when` as whenever
 
@@ -43,6 +41,22 @@ class ResumePresenterTest {
     }
 
     @Test
+    fun testGetResumeInformationWithallData() {
+        val receivedSkillsData = createSkillDataList()
+        val receivedBasicsData = createBasicsData()
+        val receivedWorkData = createWorkDataList()
+        val resumeData = ResumeData(receivedBasicsData, receivedWorkData, receivedSkillsData)
+        whenever(resumeUseCase.execute()).thenReturn(Single.just(resumeData))
+
+        resumePresenter.getResumeInformation()
+
+        verify(loadingView).showProgressBar()
+        verify(loadingView).hideProgressBar()
+        verify(resumeView, times(0)).showResumePlaceHolder()
+        verify(resumeView).renderResumeInformation(receivedBasicsData, receivedSkillsData, receivedWorkData)
+    }
+
+    @Test
     fun testGetResumeInformationSuccessfulWithNoData() {
         val resumeData = ResumeData()
         whenever(resumeUseCase.execute()).thenReturn(Single.just(resumeData))
@@ -52,6 +66,7 @@ class ResumePresenterTest {
         verify(loadingView).showProgressBar()
         verify(loadingView).hideProgressBar()
         verify(resumeView, atLeastOnce()).showResumePlaceHolder()
+        verify(resumeView, times(0)).renderResumeInformation(BasicsData(), emptyList(), emptyList())
     }
 
     @Test
@@ -65,7 +80,7 @@ class ResumePresenterTest {
         verify(resumeView, atLeastOnce()).showResumePlaceHolder()
         verify(loadingView).showProgressBar()
         verify(loadingView).hideProgressBar()
-        verify(resumeView).renderSkillsInformation(receivedSkillsData)
+        verify(resumeView, times(0)).renderResumeInformation(BasicsData(), receivedSkillsData, emptyList())
     }
 
     @Test
@@ -79,7 +94,7 @@ class ResumePresenterTest {
         verify(resumeView, atLeastOnce()).showResumePlaceHolder()
         verify(loadingView).showProgressBar()
         verify(loadingView).hideProgressBar()
-        verify(resumeView).renderBasicInformation(receivedBasicsData)
+        verify(resumeView, times(0)).renderResumeInformation(receivedBasicsData, emptyList(), emptyList())
     }
 
     @Test
@@ -93,7 +108,7 @@ class ResumePresenterTest {
         verify(resumeView, atLeastOnce()).showResumePlaceHolder()
         verify(loadingView).showProgressBar()
         verify(loadingView).hideProgressBar()
-        verify(resumeView).renderWorksInformation(receivedWorks)
+        verify(resumeView, times(0)).renderResumeInformation(BasicsData(), emptyList(), receivedWorks)
     }
 
     @Test

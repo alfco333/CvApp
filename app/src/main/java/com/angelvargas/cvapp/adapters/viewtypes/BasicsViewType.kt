@@ -1,7 +1,5 @@
 package com.angelvargas.cvapp.adapters.viewtypes
 
-import com.angelvargas.cvapp.adapters.RecyclerViewType
-
 class BasicsViewType(
     val name: String?,
     val label: String?,

@@ -3,14 +3,10 @@ package com.angelvargas.cvapp.adapters
 import android.support.v7.widget.RecyclerView
 import android.util.SparseArray
 import android.view.ViewGroup
-import com.angelvargas.cvapp.adapters.delegates.BasicsDelegateAdapter
 import com.angelvargas.cvapp.adapters.delegates.SectionTitleDelegateAdapter
 import com.angelvargas.cvapp.adapters.delegates.SkillsDelegateAdapter
 import com.angelvargas.cvapp.adapters.delegates.WorksDelegateAdapter
-import com.angelvargas.cvapp.adapters.viewtypes.BASICS_VIEW_TYPE
-import com.angelvargas.cvapp.adapters.viewtypes.SECTION_VIEW_TYPE
-import com.angelvargas.cvapp.adapters.viewtypes.SKILLS_VIEW_TYPE
-import com.angelvargas.cvapp.adapters.viewtypes.WORK_VIEW_TYPE
+import com.angelvargas.cvapp.adapters.viewtypes.*
 import com.angelvargas.cvapp.domain.manager.ResourceManager
 import com.angelvargas.cvapp.services.ImageService
 
@@ -24,8 +20,6 @@ class ResumeInfoAdapter(
         SparseArray<DelegateAdapter<in RecyclerView.ViewHolder, in RecyclerViewType>>(4)
 
     init {
-        delegateAdapters.append(BASICS_VIEW_TYPE, BasicsDelegateAdapter(imageService)
-                as DelegateAdapter<in RecyclerView.ViewHolder, in RecyclerViewType>)
         delegateAdapters.append(SKILLS_VIEW_TYPE, SkillsDelegateAdapter()
                 as DelegateAdapter<in RecyclerView.ViewHolder, in RecyclerViewType>)
         delegateAdapters.append(WORK_VIEW_TYPE, WorksDelegateAdapter(imageService, resourceManager)

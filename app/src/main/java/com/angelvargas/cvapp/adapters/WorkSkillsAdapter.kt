@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.angelvargas.cvapp.R
 
-class WorkSkillsAdapter(private var skillsList: MutableList<String>?): RecyclerView.Adapter<WorkSkillsAdapter.SkillViewHolder>() {
-
+class WorkSkillsAdapter(private var skillsList: MutableList<String>?)
+    : RecyclerView.Adapter<WorkSkillsAdapter.SkillViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkillViewHolder {
         return SkillViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_skill, parent, false))

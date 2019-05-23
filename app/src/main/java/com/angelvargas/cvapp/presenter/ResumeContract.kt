@@ -1,4 +1,4 @@
-package com.angelvargas.cvapp
+package com.angelvargas.cvapp.presenter
 
 import com.angelvargas.cvapp.domain.models.BasicsData
 import com.angelvargas.cvapp.domain.models.SkillsData

@@ -1,19 +1,20 @@
-package com.angelvargas.cvapp
+package com.angelvargas.cvapp.presenter
 
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.airbnb.lottie.LottieAnimationView
-import com.angelvargas.cvapp.adapters.PreviousWorksAdapter
+import com.angelvargas.cvapp.R
 import com.angelvargas.cvapp.adapters.ResumeInfoAdapter
-import com.angelvargas.cvapp.adapters.WorkSkillsAdapter
 import com.angelvargas.cvapp.adapters.viewtypes.SectionTitleViewType
 import com.angelvargas.cvapp.domain.manager.ResourceManager
 import com.angelvargas.cvapp.domain.models.BasicsData
@@ -22,7 +23,6 @@ import com.angelvargas.cvapp.domain.models.WorkData
 import com.angelvargas.cvapp.domain.usecase.GetResumeInformationUseCase
 import com.angelvargas.cvapp.mappers.SkillsViewTypeMapper
 import com.angelvargas.cvapp.mappers.WorkViewTypeMapper
-import com.angelvargas.cvapp.presenter.ResumePresenter
 import com.angelvargas.cvapp.services.PicassImageService
 import com.angelvargas.cvapp.view.ErrorView
 import com.angelvargas.cvapp.view.LoadingView
@@ -30,20 +30,14 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract.View {
 
-    private var skillsRecyclerView: RecyclerView? = null
-    private var previousWorksRecyclerView: RecyclerView? = null
     private var progressBar: LottieAnimationView? = null
-    private var infoContainer: ConstraintLayout? = null
-    private var profileName: TextView? = null
+    private var appbarContainer: AppBarLayout? = null
     private var profileImage: ImageView? = null
     private var profileDescription: TextView? = null
-    private var skillsTitle: TextView? = null
     private var placeholderContainer: View? = null
     private var resumeInfo: RecyclerView? = null
     private var collapsinToolBar: CollapsingToolbarLayout? = null
 
-    private var workSkillsAdapter: WorkSkillsAdapter? = null
-    private var previousWorksAdapter: PreviousWorksAdapter? = null
     private var resumeInfoAdapter: ResumeInfoAdapter? = null
     private lateinit var resourceManager: ResourceManager
 
@@ -81,13 +75,9 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
 
     override fun initializeViewComponents() {
         progressBar = this.findViewById(R.id.lottie_loading)
-        skillsRecyclerView = this.findViewById(R.id.skills_list)
-        previousWorksRecyclerView = this.findViewById(R.id.work_experience_list)
-        profileName = this.findViewById(R.id.tv_profile_name)
+        appbarContainer = this.findViewById(R.id.appbar_container)
         profileImage = this.findViewById(R.id.iv_profile_image)
         profileDescription = this.findViewById(R.id.tv_profile_description)
-        infoContainer = this.findViewById(R.id.info_container)
-        skillsTitle = this.findViewById(R.id.tv_profile_main_skill)
         placeholderContainer = this.findViewById(R.id.container_placeholder)
         resumeInfo = this.findViewById(R.id.rv_resume_info)
         collapsinToolBar = findViewById<View>(R.id.collapsing_toolbar) as CollapsingToolbarLayout
@@ -96,6 +86,8 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
     override fun renderResumeInformation(basicsData: BasicsData,
                                          skillsData: List<SkillsData>,
                                          workData: List<WorkData>) {
+        appbarContainer?.visibility = VISIBLE
+        resumeInfo?.visibility = VISIBLE
         collapsinToolBar?.title = basicsData.name
 
         profileDescription?.text = basicsData.summary
@@ -114,8 +106,8 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
     }
 
     override fun showResumePlaceHolder() {
-//        infoContainer?.visibility = GONE
-//        placeholderContainer?.visibility = VISIBLE
+        appbarContainer?.visibility = GONE
+        placeholderContainer?.visibility = VISIBLE
     }
 
     override fun showError(errorMessage: String) {
@@ -123,11 +115,13 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
     }
 
     override fun showProgressBar() {
-//       progressBar?.visibility = VISIBLE
+        progressBar?.visibility = VISIBLE
+        appbarContainer?.visibility = GONE
+        resumeInfo?.visibility = GONE
     }
 
     override fun hideProgressBar() {
-//        progressBar?.visibility = GONE
+        progressBar?.visibility = GONE
     }
 
     private fun showSnackbar(errorMessage: String) {

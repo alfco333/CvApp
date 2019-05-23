@@ -1,7 +1,5 @@
 package com.angelvargas.cvapp.adapters.viewtypes
 
-import com.angelvargas.cvapp.adapters.RecyclerViewType
-
 class WorkViewType(val company: String?,
                    val position: String?,
                    val urlImage: String?,

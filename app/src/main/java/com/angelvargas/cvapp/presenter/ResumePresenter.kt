@@ -1,6 +1,5 @@
 package com.angelvargas.cvapp.presenter
 
-import com.angelvargas.cvapp.ResumeContract
 import com.angelvargas.cvapp.domain.manager.ResourceManager
 import com.angelvargas.cvapp.domain.models.BasicsData
 import com.angelvargas.cvapp.domain.usecase.GetResumeInformationUseCase
@@ -9,11 +8,11 @@ import com.angelvargas.cvapp.view.LoadingView
 import io.reactivex.disposables.CompositeDisposable
 
 class ResumePresenter(
-        private val resumeView: ResumeContract.View,
-        private val loadingView: LoadingView,
-        private val errorView: ErrorView,
-        private val resourceManager: ResourceManager,
-        private val resumeUseCase: GetResumeInformationUseCase
+    private val resumeView: ResumeContract.View,
+    private val loadingView: LoadingView,
+    private val errorView: ErrorView,
+    private val resourceManager: ResourceManager,
+    private val resumeUseCase: GetResumeInformationUseCase
 ): ResumeContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()
