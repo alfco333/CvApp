@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.airbnb.lottie.LottieAnimationView
+import com.angelvargas.cvapp.CvApplication
 import com.angelvargas.cvapp.R
 import com.angelvargas.cvapp.adapters.ResumeInfoAdapter
 import com.angelvargas.cvapp.adapters.viewtypes.SectionTitleViewType
@@ -37,9 +38,7 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
     private var placeholderContainer: View? = null
     private var resumeInfo: RecyclerView? = null
     private var collapsinToolBar: CollapsingToolbarLayout? = null
-
     private var resumeInfoAdapter: ResumeInfoAdapter? = null
-    private lateinit var resourceManager: ResourceManager
 
     private val imageService = PicassImageService()
 
@@ -86,8 +85,9 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
     override fun renderResumeInformation(basicsData: BasicsData,
                                          skillsData: List<SkillsData>,
                                          workData: List<WorkData>) {
-        appbarContainer?.visibility = VISIBLE
         resumeInfo?.visibility = VISIBLE
+        appbarContainer?.visibility = VISIBLE
+        placeholderContainer?.visibility = GONE
         collapsinToolBar?.title = basicsData.name
 
         profileDescription?.text = basicsData.summary
@@ -115,9 +115,9 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
     }
 
     override fun showProgressBar() {
+        resumeInfo?.visibility = GONE
         progressBar?.visibility = VISIBLE
         appbarContainer?.visibility = GONE
-        resumeInfo?.visibility = GONE
     }
 
     override fun hideProgressBar() {

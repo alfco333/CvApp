@@ -1,6 +1,6 @@
 package com.angelvargas.cvapp.di
 
-import com.angelvargas.cvapp.MainActivity
+import com.angelvargas.cvapp.presenter.MainActivity
 import com.angelvargas.data.di.DataModule
 import com.angelvargas.data.network.ApiServiceFactory
 import dagger.Component
