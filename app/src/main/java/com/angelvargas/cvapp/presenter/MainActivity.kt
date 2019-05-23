@@ -93,12 +93,12 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
         profileDescription?.text = basicsData.summary
         profileImage?.let { imageService.loadImageInto(it, basicsData.picture) }
 
-        resumeInfoAdapter = ResumeInfoAdapter(imageService,
-            resourceManager,
-            mutableListOf(SectionTitleViewType(resourceManager.getSkillsSectionTitle()),
-                *SkillsViewTypeMapper().transformCollection(skillsData).toTypedArray(),
-                SectionTitleViewType(resourceManager.getWorkSectionTitle()),
-                *WorkViewTypeMapper().transformCollection(workData).toTypedArray()))
+        resumeInfoAdapter = ResumeInfoAdapter(imageService, resourceManager)
+        resumeInfoAdapter?.setData(mutableListOf(
+            SectionTitleViewType(resourceManager.getSkillsSectionTitle()),
+            *SkillsViewTypeMapper().transformCollection(skillsData).toTypedArray(),
+            SectionTitleViewType(resourceManager.getWorkSectionTitle()),
+            *WorkViewTypeMapper().transformCollection(workData).toTypedArray()))
         resumeInfo?.apply {
             adapter = resumeInfoAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)

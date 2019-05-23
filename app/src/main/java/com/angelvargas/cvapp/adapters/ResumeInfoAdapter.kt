@@ -9,12 +9,14 @@ import com.angelvargas.cvapp.adapters.delegates.WorksDelegateAdapter
 import com.angelvargas.cvapp.adapters.viewtypes.*
 import com.angelvargas.cvapp.domain.manager.ResourceManager
 import com.angelvargas.cvapp.services.ImageService
+import javax.inject.Inject
 
-class ResumeInfoAdapter(
-    imageService: ImageService,
-    resourceManager: ResourceManager,
-    private val resumeViewTypes: MutableList<RecyclerViewType>?
+class ResumeInfoAdapter @Inject constructor(
+    val imageService: ImageService,
+    val resourceManager: ResourceManager
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var resumeViewTypes: MutableList<RecyclerViewType>? = null
 
     private val delegateAdapters =
         SparseArray<DelegateAdapter<in RecyclerView.ViewHolder, in RecyclerViewType>>(4)
@@ -26,6 +28,10 @@ class ResumeInfoAdapter(
                 as DelegateAdapter<in RecyclerView.ViewHolder, in RecyclerViewType>)
         delegateAdapters.append(SECTION_VIEW_TYPE, SectionTitleDelegateAdapter()
                 as DelegateAdapter<in RecyclerView.ViewHolder, in RecyclerViewType>)
+    }
+
+    fun setData(resumeViewTypes: MutableList<RecyclerViewType>?) {
+        this.resumeViewTypes = resumeViewTypes
     }
 
     override fun getItemViewType(position: Int): Int {

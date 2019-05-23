@@ -53,6 +53,7 @@ dependencies {
     implementation okhttp.values()
     implementation retrofit.values()
     implementation lifecycle.values()
+    implementation daggerDependencies.javax
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

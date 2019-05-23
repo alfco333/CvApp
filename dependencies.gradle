@@ -39,6 +39,7 @@ ext {
     lottieVersion = "2.7.0"
     circleImageVersion = "3.0.0"
     daggerVersion = "2.17"
+    javaxVersion = "1"
 
     androidSupport = [
             supportDesign     : "com.android.support:design:${androidSupportVersion}",
@@ -89,6 +90,7 @@ ext {
             daggerCompiler      : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger              : "com.google.dagger:dagger-android:${daggerVersion}",
             daggerSupport       : "com.google.dagger:dagger-android-support:${daggerVersion}",
-            daggerAnnotation    : "com.google.dagger:dagger-android-processor:${daggerVersion}"
+            daggerAnnotation    : "com.google.dagger:dagger-android-processor:${daggerVersion}",
+            javax               : "javax.inject:javax.inject:${javaxVersion}"
     ]
 }

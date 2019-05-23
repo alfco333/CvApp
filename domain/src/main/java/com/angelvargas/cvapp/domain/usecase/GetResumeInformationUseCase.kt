@@ -6,10 +6,13 @@ import com.angelvargas.cvapp.domain.models.ResumeData
 import com.angelvargas.cvapp.domain.repository.ResumeRepository
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class GetResumeInformationUseCase(private val resumeRepository: ResumeRepository,
-                                  private val executionScheduler: ThreadExecutor,
-                                  private val postExecutionScheduler: PostExecutionThread) {
+@Singleton
+class GetResumeInformationUseCase @Inject constructor(val resumeRepository: ResumeRepository,
+                                                      val executionScheduler: ThreadExecutor,
+                                                      val postExecutionScheduler: PostExecutionThread) {
 
     fun execute(): Single<ResumeData> {
         return resumeRepository.getCvInformation()

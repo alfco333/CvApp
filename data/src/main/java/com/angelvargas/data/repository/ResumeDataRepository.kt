@@ -9,10 +9,13 @@ import com.angelvargas.data.remote.ResumeResponse
 import com.angelvargas.data.services.ResumeApiServices
 import io.reactivex.Single
 import java.net.SocketTimeoutException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class ResumeDataRepository(
-    private val resumeServices: ResumeApiServices,
-    private val localDataSource: LocalDataSource
+@Singleton
+class ResumeDataRepository @Inject constructor(
+    val resumeServices: ResumeApiServices,
+    val localDataSource: LocalDataSource
 ): ResumeRepository {
 
     override fun getCvInformation(): Single<ResumeData> {
