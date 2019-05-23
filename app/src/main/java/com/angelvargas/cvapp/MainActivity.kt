@@ -21,18 +21,11 @@ import com.angelvargas.cvapp.domain.models.BasicsData
 import com.angelvargas.cvapp.domain.models.SkillsData
 import com.angelvargas.cvapp.domain.models.WorkData
 import com.angelvargas.cvapp.domain.usecase.GetResumeInformationUseCase
-import com.angelvargas.cvapp.managers.ResumeResourceManager
 import com.angelvargas.cvapp.presenter.ResumePresenter
 import com.angelvargas.cvapp.services.PicassImageService
 import com.angelvargas.cvapp.view.ErrorView
 import com.angelvargas.cvapp.view.LoadingView
-import com.angelvargas.data.database.RealmProvider
-import com.angelvargas.data.database.RealmResumeDataSource
-import com.angelvargas.data.executor.JobExecutor
-import com.angelvargas.data.executor.UiExecutor
-import com.angelvargas.data.network.ApiServiceFactory
-import com.angelvargas.data.repository.ResumeDataRepository
-import com.angelvargas.data.services.ResumeApiServices
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract.View {
 
@@ -48,25 +41,26 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
 
     private var workSkillsAdapter: WorkSkillsAdapter? = null
     private var previousWorksAdapter: PreviousWorksAdapter? = null
-    private lateinit var resourceManager: ResourceManager
 
     private val imageService = PicassImageService()
 
+    @Inject
+    lateinit var resourceManager: ResourceManager
+    @Inject
+    lateinit var resumeInformationUseCase: GetResumeInformationUseCase
+
     private val resumePresenter by lazy {
         ResumePresenter(this,
-                this,
-                this,
-                ResumeResourceManager(resources),
-                GetResumeInformationUseCase(ResumeDataRepository(ApiServiceFactory()
-                    .makeApiService(ResumeApiServices::class.java), RealmResumeDataSource(RealmProvider())),
-                    JobExecutor(),
-                    UiExecutor()))
+            this,
+            this,
+            resourceManager,
+            resumeInformationUseCase)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        resourceManager = ResumeResourceManager(resources)
+        (application as CvApplication).getAppComponent().inject(this)
         resumePresenter.initView()
     }
 
