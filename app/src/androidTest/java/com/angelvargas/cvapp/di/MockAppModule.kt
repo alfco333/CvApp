@@ -7,17 +7,18 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class MockAppModule {
+class MockAppModule(private val mockDataRepository: ResumeRepository,
+                    private val mockResourceManager: ResourceManager) {
 
     @Provides
     @Singleton
     fun providesResourceManager(): ResourceManager {
-        return MockResourceManager()
+        return mockResourceManager
     }
 
     @Provides
     @Singleton
     fun providesResumeRepository(): ResumeRepository {
-        return MockDataRepository()
+        return mockDataRepository
     }
 }
