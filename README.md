@@ -1,6 +1,6 @@
 #### CV APP
 
-Sample project to display a Resume as part of the Challenge exercise
+Sample project to display a Resume as part of the Challenge exercise.
 
 ###### Project Structure
 
@@ -8,6 +8,9 @@ The project is composed by the following parts:
 * Clean Architecture
 * MVP
 * Multi-Modules with Gradle (Data - Domain - App/Presentation)
+* Dagger for dependencies injection
+* Realm for the local storage
+* Delegates to manage how the view is composed
 
 Each of them with a specific purpose:
 
