@@ -1,8 +1,11 @@
 package com.angelvargas.cvapp.di
 
 import com.angelvargas.cvapp.domain.manager.ResourceManager
+import com.angelvargas.cvapp.presenter.MainActivityTest.Companion.SKILLS_HEADER_TITLE
+import com.angelvargas.cvapp.presenter.MainActivityTest.Companion.WORKS_HEADER_TITLE
 
 class MockResourceManager: ResourceManager {
+
     override fun getConnectionErrorMessage(): String {
         return ""
     }
@@ -16,7 +19,7 @@ class MockResourceManager: ResourceManager {
     }
 
     override fun getSkillsHeader(): String {
-        return "Skills"
+        return ""
     }
 
     override fun getWorkPeriodFormat(startDate: String?, endDate: String?): String {
@@ -24,10 +27,10 @@ class MockResourceManager: ResourceManager {
     }
 
     override fun getSkillsSectionTitle(): String {
-        return "Skills"
+        return SKILLS_HEADER_TITLE
     }
 
     override fun getWorkSectionTitle(): String {
-        return ""
+        return WORKS_HEADER_TITLE
     }
 }

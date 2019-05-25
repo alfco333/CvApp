@@ -1,12 +1,9 @@
 package com.angelvargas.cvapp.presenter
 
 import android.content.Intent
-import android.support.design.widget.CollapsingToolbarLayout
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
@@ -14,13 +11,11 @@ import com.angelvargas.cvapp.CvApplication
 import com.angelvargas.cvapp.R
 import com.angelvargas.cvapp.assertionutil.CustomAssertions.Companion.hasItemCount
 import com.angelvargas.cvapp.assertionutil.CustomMatchers.Companion.atPosition
+import com.angelvargas.cvapp.assertionutil.CustomMatchers.Companion.matchToolbarTitle
 import com.angelvargas.cvapp.assertionutil.CustomMatchers.Companion.withItemCount
 import com.angelvargas.cvapp.di.DaggerMockAppComponent
 import com.angelvargas.cvapp.di.MockAppModule
 import com.angelvargas.cvapp.domain.models.*
-import org.hamcrest.Description
-import org.hamcrest.Matcher
-import org.hamcrest.core.Is.`is`
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -49,13 +44,13 @@ class MainActivityTest {
     @Test
     fun countPrograms() {
         onView(withId(R.id.rv_resume_info))
-            .check(matches(withItemCount(7)))
+            .check(matches(withItemCount(RESUME_TOTAL_VIEWS)))
     }
 
     @Test
     fun countProgramsWithViewAssertion() {
         onView(withId(R.id.rv_resume_info))
-            .check(hasItemCount(7))
+            .check(hasItemCount(RESUME_TOTAL_VIEWS))
     }
 
     @Test
@@ -72,13 +67,25 @@ class MainActivityTest {
     @Test
     fun testTitleSkillsList() {
         onView(withId(R.id.rv_resume_info))
-            .check(matches(atPosition(0, withText("Skills"))))
+            .check(matches(atPosition(0, withText(SKILLS_HEADER_TITLE))))
     }
 
     @Test
     fun testElementSkillsList() {
         onView(withId(R.id.rv_resume_info))
             .check(matches(atPosition(1, hasDescendant(withText(SKILL_NAME)))))
+    }
+
+    @Test
+    fun testTitleWorksList() {
+        onView(withId(R.id.rv_resume_info))
+            .check(matches(atPosition(2, withText(WORKS_HEADER_TITLE))))
+    }
+
+    @Test
+    fun testElementWorksList() {
+        onView(withId(R.id.rv_resume_info))
+            .check(matches(atPosition(3, hasDescendant(withText(WORK_COMPANY)))))
     }
 
     private fun createSkillDataList(): List<SkillsData> {
@@ -89,28 +96,6 @@ class MainActivityTest {
                 SKILL_KEYWORDS
             )
         )
-    }
-
-    private fun matchToolbarTitle(
-        title: CharSequence
-    ): ViewInteraction {
-        return onView(isAssignableFrom(CollapsingToolbarLayout::class.java))
-            .check(matches(withToolbarTitle(`is`(title))))
-    }
-
-    private fun withToolbarTitle(
-        textMatcher: Matcher<CharSequence>
-    ): Matcher<Any> {
-        return object : BoundedMatcher<Any, CollapsingToolbarLayout>(CollapsingToolbarLayout::class.java) {
-            public override fun matchesSafely(toolbar: CollapsingToolbarLayout): Boolean {
-                return textMatcher.matches(toolbar.title)
-            }
-
-            override fun describeTo(description: Description) {
-                description.appendText("with toolbar title: ")
-                textMatcher.describeTo(description)
-            }
-        }
     }
 
     private fun createWorkDataList(): List<WorkData> {
@@ -192,5 +177,8 @@ class MainActivityTest {
         const val BASICS_PICTURE = "picture"
         const val BASICS_EMAIL = "email"
         const val BASICS_SUMMARY = "summary"
+        const val RESUME_TOTAL_VIEWS = 7
+        const val SKILLS_HEADER_TITLE = "Skills"
+        const val WORKS_HEADER_TITLE = "Past jobs"
     }
 }
