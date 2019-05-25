@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity(), ErrorView, LoadingView, ResumeContract
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resume)
-        (application as CvApplication).getAppComponent().inject(this)
+        (application as CvApplication).appComponent.inject(this)
         resumePresenter.initView()
     }
 

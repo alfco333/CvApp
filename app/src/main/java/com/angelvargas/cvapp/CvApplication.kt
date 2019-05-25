@@ -12,7 +12,7 @@ import io.realm.Realm
 
 class CvApplication: Application() {
 
-    private lateinit var appComponent: AppComponent
+    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -25,9 +25,5 @@ class CvApplication: Application() {
             .dataModule(DataModule())
             .networkModule(NetworkModule(BASE_URL))
             .build()
-    }
-
-    internal fun getAppComponent(): AppComponent {
-        return appComponent
     }
 }
