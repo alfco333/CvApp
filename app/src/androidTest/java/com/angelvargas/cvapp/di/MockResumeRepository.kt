@@ -4,13 +4,12 @@ import com.angelvargas.cvapp.domain.models.ResumeData
 import com.angelvargas.cvapp.domain.repository.ResumeRepository
 import io.reactivex.Single
 
-class MockDataRepository(): ResumeRepository {
-
+class MockResumeRepository(private val resumeData: ResumeData): ResumeRepository {
     override fun getCvInformation(): Single<ResumeData> {
         return Single.just(resumeData)
     }
 
     override fun getLocalCvInformation(): Single<ResumeData> {
-        return Single.just(ResumeData())
+        return Single.just(resumeData)
     }
 }

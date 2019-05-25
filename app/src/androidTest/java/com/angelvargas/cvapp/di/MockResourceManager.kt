@@ -16,7 +16,7 @@ class MockResourceManager: ResourceManager {
     }
 
     override fun getSkillsHeader(): String {
-        return ""
+        return "Skills"
     }
 
     override fun getWorkPeriodFormat(startDate: String?, endDate: String?): String {
@@ -24,7 +24,7 @@ class MockResourceManager: ResourceManager {
     }
 
     override fun getSkillsSectionTitle(): String {
-        return ""
+        return "Skills"
     }
 
     override fun getWorkSectionTitle(): String {

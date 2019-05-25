@@ -17,10 +17,7 @@ import com.angelvargas.cvapp.assertionutil.CustomMatchers.Companion.atPosition
 import com.angelvargas.cvapp.assertionutil.CustomMatchers.Companion.withItemCount
 import com.angelvargas.cvapp.di.DaggerMockAppComponent
 import com.angelvargas.cvapp.di.MockAppModule
-import com.angelvargas.cvapp.domain.manager.ResourceManager
 import com.angelvargas.cvapp.domain.models.*
-import com.angelvargas.cvapp.domain.repository.ResumeRepository
-import io.reactivex.Single
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.core.Is.`is`
@@ -28,9 +25,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
-import org.mockito.Mockito.`when` as whenever
 
 
 @RunWith(AndroidJUnit4::class)
@@ -40,21 +34,13 @@ class MainActivityTest {
     @JvmField
     var activityRule = ActivityTestRule(MainActivity::class.java, true, false)
 
-    @Mock
-    lateinit var resumeRepository: ResumeRepository
-    @Mock
-    lateinit var resourceManager: ResourceManager
-
     @Before
     fun setupMainActivity() {
-        MockitoAnnotations.initMocks(this)
-        whenever(resumeRepository.getCvInformation())
-            .thenReturn(Single.just(ResumeData(createBasicsData(), createWorkDataList(), createSkillDataList())))
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val app = instrumentation.targetContext.applicationContext as CvApplication
 
         val testComponent = DaggerMockAppComponent.builder()
-            .mockAppModule(MockAppModule(resumeRepository, resourceManager))
+            .mockAppModule(MockAppModule(ResumeData(createBasicsData(), createWorkDataList(), createSkillDataList())))
             .build()
         app.appComponent = testComponent
         activityRule.launchActivity(Intent())
